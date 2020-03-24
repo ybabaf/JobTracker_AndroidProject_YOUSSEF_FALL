@@ -9,4 +9,6 @@
     <string name="logo">logo</string>
     <string name="allMenu">Menu</string>
     <string name="offer_location">location</string>
+    <string name="type">Full Time</string>
+    <string name="description">Job Offer Description</string>
 </resources>

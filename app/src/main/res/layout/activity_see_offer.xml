@@ -4,7 +4,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:padding="8dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,8 +15,8 @@
 
     <ImageView
         android:id="@+id/imageLogoEnt"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
         android:contentDescription="@string/logo"
@@ -57,12 +58,53 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="10dp"/>
+
+        <TextView
+            android:id="@+id/textViewType"
+            android:text="@string/type"
+            android:layout_below="@id/textViewLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@+id/imageLogoEnt"
+            android:layout_toRightOf="@+id/imageLogoEnt"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"/>
     </RelativeLayout>
 
+    <!-- Line Break -->
     <TableRow
         android:id="@+id/hr"
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="#444" />
+        android:background="#444"
+        android:layout_marginTop="8dp"/>
+
+
+    <!-- Job Offer Description -->
+    <TextView
+        android:id="@+id/textViewTitleDesc"
+        android:text="Job Offer Description"
+        android:textSize="20sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:textColor="#1A1A1A"
+        android:layout_marginTop="20dp"
+        android:paddingBottom="10dp"
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <TextView
+            android:id="@+id/textViewDescription"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:text="@string/description"
+            android:textColor="#1A1A1A"
+            android:textSize="16sp"
+            />
+    </ScrollView>
 
 </LinearLayout>

@@ -10,5 +10,7 @@
     <string name="logo">logo</string>
     <string name="allMenu">Menu</string>
     <string name="offer_location">lieu</string>
+    <string name="type">Temps Plein</string>
+
 
 </resources>
