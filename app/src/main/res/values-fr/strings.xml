@@ -9,4 +9,6 @@
     <string name="search_hint">Recherche</string>
     <string name="logo">logo</string>
     <string name="allMenu">Menu</string>
+    <string name="offer_location">lieu</string>
+
 </resources>

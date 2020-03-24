@@ -8,4 +8,5 @@
     <string name="search_hint">Search</string>
     <string name="logo">logo</string>
     <string name="allMenu">Menu</string>
+    <string name="offer_location">location</string>
 </resources>
