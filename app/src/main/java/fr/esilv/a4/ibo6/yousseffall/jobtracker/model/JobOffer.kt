@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class JobOffer (
     // --Test values ---
-
+/*
     @SerializedName("userId")
     val userId: Int,
     @SerializedName("id")
@@ -14,12 +14,12 @@ data class JobOffer (
     val title: String,
     @SerializedName("body")
     val body: String
-
+*/
     // --! Test values ---
 
 
     // Real attributes for job offer, commented for test purpose
-    /*
+
     @SerializedName("id")
     val id: String,
     @SerializedName("type")
@@ -27,7 +27,7 @@ data class JobOffer (
     @SerializedName("url")
     val url: String,
     @SerializedName("created_at")
-    val created_at: Date,
+    val created_at: String,
     @SerializedName("company")
     val company: String,
     @SerializedName("company_url")
@@ -42,6 +42,6 @@ data class JobOffer (
     val how_to_apply: String,
     @SerializedName("company_logo")
     val company_logo: String
-    */
+
 
 )
