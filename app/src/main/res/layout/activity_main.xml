@@ -5,16 +5,17 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="10dp"
+
     >
     <!-- Toolbar declaration-->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/activity_main_toolbar"
-        android:minHeight="?attr/actionBarSize"
-        android:layout_width="match_parent"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:titleTextColor="@android:color/white"
-        android:background="?attr/colorPrimary"/>
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@android:style/Theme.NoTitleBar"
+         />
 
     <!-- Most popular languages -->
     <TextView
@@ -25,7 +26,7 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textColor="#1A1A1A"
-        android:paddingBottom="10dp"
+        android:padding="10dp"
         />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewLanguages"
@@ -34,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:paddingBottom="10dp"/>
+        android:padding="10dp"/>
     <!-- End of Most pop languages-->
 
     <!-- Latest Positions -->
@@ -46,14 +47,15 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textColor="#1A1A1A"
-        android:paddingBottom="10dp"
+        android:padding="10dp"
         />
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".activity.MainActivity">
+        tools:context=".activity.MainActivity"
+        android:padding="10dp">
 
 
         <!-- this layout allows to refresh the view when the user swipes down-->

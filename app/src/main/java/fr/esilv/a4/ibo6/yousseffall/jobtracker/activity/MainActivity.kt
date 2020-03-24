@@ -7,6 +7,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.esilv.a4.ibo6.yousseffall.jobtracker.R
 import fr.esilv.a4.ibo6.yousseffall.jobtracker.adapter.JobOffersAdapter
@@ -25,7 +26,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-       // setSupportActionBar(findViewById(R.id.activity_main_toolbar))
+        val toolbar = findViewById(R.id.activity_main_toolbar) as Toolbar?
+        setSupportActionBar(toolbar)
 
         //Whenever we swipe down (to refresh the page) it will recall fetchJobOffers() to get the latest offers available
         refreshLayout.setOnRefreshListener {
