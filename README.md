@@ -1,4 +1,4 @@
-# JobTracker_AndroidProject_YOUSSEF_FALL
+# JobTracker
 Ressources:
 https://www.youtube.com/watch?v=InAjUkH2mdA
 https://www.youtube.com/watch?v=lja5ibhaq_0
