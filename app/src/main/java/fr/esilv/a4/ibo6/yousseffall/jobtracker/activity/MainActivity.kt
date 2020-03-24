@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
         //to fetch the offers whenever the ui is displayed
         fetchJobOffers()
     }
-
+/*
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         // - Inflate the menu and add it to the Toolbar
         val inflater: MenuInflater = menuInflater
@@ -63,7 +63,7 @@ class MainActivity : AppCompatActivity() {
             else -> super.onOptionsItemSelected(item)
         }
     }
-
+*/
     //Fetches all Offers (Positions) from the API
     private fun fetchJobOffers() {
         refreshLayout.isRefreshing = true;
