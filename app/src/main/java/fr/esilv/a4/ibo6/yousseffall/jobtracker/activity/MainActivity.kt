@@ -10,7 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.esilv.a4.ibo6.yousseffall.jobtracker.R
 import fr.esilv.a4.ibo6.yousseffall.jobtracker.adapter.JobOffersAdapter
+import fr.esilv.a4.ibo6.yousseffall.jobtracker.adapter.ProgrammingLanguageAdapter
 import fr.esilv.a4.ibo6.yousseffall.jobtracker.model.JobOffer
+import fr.esilv.a4.ibo6.yousseffall.jobtracker.model.ProgrammingLanguage
 import fr.esilv.a4.ibo6.yousseffall.jobtracker.network.JobOfferAPI
 import kotlinx.android.synthetic.main.activity_main.*
 import retrofit2.Call
@@ -30,6 +32,7 @@ class MainActivity : AppCompatActivity() {
             fetchJobOffers()
         }
 
+        showProgLanguages(fetchProgLanguages())
         //to fetch the offers whenever the ui is displayed
         fetchJobOffers()
     }
@@ -83,15 +86,10 @@ class MainActivity : AppCompatActivity() {
                 val jobOffers = response.body()
                 println("\n\n $response")
                 //println("message " + response.message())
-
-
-
                 // --- Debug --
                 println("$$$!$!$!$$!$!!$$!$!$$$!$!$!$$!$!!!$!$!$!!$$!$!!$!$$!$!$$!!")
                 println(":: Response Body ::")
                 println(jobOffers)
-
-
 
                 jobOffers?.let{
                     showJobOffers(jobOffers)
@@ -102,9 +100,28 @@ class MainActivity : AppCompatActivity() {
         } )
     }
 
+    fun fetchProgLanguages(): List<ProgrammingLanguage> {
+        //Creating languages manually to test
+        val python = ProgrammingLanguage("Python", R.drawable.python)
+        val java = ProgrammingLanguage("Java", R.drawable.java)
+        val ruby = ProgrammingLanguage("Ruby", R.drawable.ruby)
+        val csharp = ProgrammingLanguage("C#", R.drawable.csharp)
+        val javascript = ProgrammingLanguage("JavaScript", R.drawable.javascript)
+        val swift = ProgrammingLanguage("Swift", R.drawable.swift)
+        val angular = ProgrammingLanguage("AngularJS", R.drawable.angular)
+        val node = ProgrammingLanguage("nodeJS", R.drawable.nodejs)
+
+        val progLanguages = listOf(python, java, ruby, csharp, javascript, swift, angular,  node)
+        return progLanguages
+    }
 
     private fun showJobOffers(jobOffers: List<JobOffer>) {
         recyclerViewOffers.layoutManager = LinearLayoutManager(this)
         recyclerViewOffers.adapter = JobOffersAdapter(jobOffers)
+    }
+
+    private fun showProgLanguages(progLanguages: List<ProgrammingLanguage>) {
+        recyclerViewLanguages.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        recyclerViewLanguages.adapter = ProgrammingLanguageAdapter(progLanguages)
     }
 }
