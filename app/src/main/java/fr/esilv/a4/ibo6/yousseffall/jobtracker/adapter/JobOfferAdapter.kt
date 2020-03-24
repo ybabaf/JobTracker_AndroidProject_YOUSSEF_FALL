@@ -5,7 +5,7 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.content.ContextCompat.startActivity
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import fr.esilv.a4.ibo6.yousseffall.jobtracker.R
 import fr.esilv.a4.ibo6.yousseffall.jobtracker.model.JobOffer
@@ -26,13 +26,8 @@ class JobOffersAdapter(private val jobOffers : List<JobOffer>) : RecyclerView.Ad
         val jobOffer = jobOffers[position]
 
         holder.view.textViewTitle.text = jobOffer.title  //Binds title data to the view (txtView having the id : textWiewTitle in layout_offer.xml)
-        holder.view.textViewLocation.text = jobOffer.description
-
-       /* holder.view.buttonSeeOffer.setOnClickListener(({
-            val intent = Intent(Context context, SeeOfferActivity::class.java)
-            //intent.putExtra("jobOffer", jobOffer)
-            startActivity(intent)
-        }))*/
+        holder.view.textViewLocation.text = HtmlCompat.fromHtml(jobOffer.description, 0)
+        //We need to bind the data the same exact way for all of the JobOffer's class attributes, I'm just testing with this for now
 
         //Will show only if the offer is 'new', need to write a function that changes the new variable from true to false based on the 'created_at' date
         //holder.view.textViewIsNew.visibility = if (jobOffer.isNew) View.VISIBLE else View.INVISIBLE
