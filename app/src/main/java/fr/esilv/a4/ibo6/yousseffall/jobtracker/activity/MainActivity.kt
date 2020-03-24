@@ -7,6 +7,7 @@ import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
 import fr.esilv.a4.ibo6.yousseffall.jobtracker.R
@@ -22,6 +23,9 @@ import retrofit2.Response
 
 
 class MainActivity : AppCompatActivity() {
+
+    var jobOffersSearch:MutableList<JobOffer> = ArrayList()
+    var jobOffers:MutableList<JobOffer> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,34 +43,39 @@ class MainActivity : AppCompatActivity() {
         fetchJobOffers()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
         // - Inflate the menu and add it to the Toolbar
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.activity_toolbar, menu)
-        return true
-    }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        //3 - Handle actions on menu items
-        return when (item.getItemId()) {
-            R.id.menu_activity_options -> {
-                Toast.makeText(
-                    this,
-                    "Il n'y a rien à paramétrer ici, passez votre chemin...",
-                    Toast.LENGTH_LONG
-                ).show()
-                true
-            }
-            R.id.menu_activity_search -> {
-                Toast.makeText(
-                    this,
-                    "Recherche indisponible, demandez plutôt l'avis de Google, c'est mieux et plus rapide.",
-                    Toast.LENGTH_LONG
-                ).show()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
+        val searchItem = menu.findItem(R.id.menu_activity_search)
+        if(searchItem != null) {
+            val searchView = searchItem.actionView as SearchView
+            searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                override fun onQueryTextSubmit(query: String?): Boolean {
+                    return true
+                }
+
+                override fun onQueryTextChange(newText: String?): Boolean {
+                    if (newText!!.isNotEmpty()) {
+                        jobOffersSearch.clear()
+                        val search = newText.toLowerCase()
+                        jobOffers.forEach {
+                            if (it.description.toLowerCase().contains(search)) {
+                                jobOffersSearch.add(it)
+                            }
+                        }
+                        showJobOffers(jobOffersSearch)
+                    } else {
+                        showJobOffers(jobOffers)
+                    }
+                    return true
+                }
+
+            })
         }
+
+        return true
     }
 
     //Fetches all Offers (Positions) from the API
@@ -85,7 +94,7 @@ class MainActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<List<JobOffer>>, response: Response<List<JobOffer>>) {
                 refreshLayout.isRefreshing = false;
-                val jobOffers = response.body()
+                jobOffers = response.body() as ArrayList
                 println("\n\n $response")
                 //println("message " + response.message())
                 // --- Debug --
@@ -93,7 +102,7 @@ class MainActivity : AppCompatActivity() {
                 println(":: Response Body ::")
                 println(jobOffers)
 
-                jobOffers?.let{
+                jobOffers.let{
                     showJobOffers(jobOffers)
                 }
 
@@ -116,6 +125,7 @@ class MainActivity : AppCompatActivity() {
         val progLanguages = listOf(python, java, ruby, csharp, javascript, swift, angular,  node)
         return progLanguages
     }
+
 
     private fun showJobOffers(jobOffers: List<JobOffer>) {
         recyclerViewOffers.layoutManager = LinearLayoutManager(this)
