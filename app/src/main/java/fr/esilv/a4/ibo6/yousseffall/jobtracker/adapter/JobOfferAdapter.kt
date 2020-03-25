@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import fr.esilv.a4.ibo6.yousseffall.jobtracker.R
 import fr.esilv.a4.ibo6.yousseffall.jobtracker.model.JobOffer
 import kotlinx.android.synthetic.main.layout_offer.view.*
@@ -23,9 +24,15 @@ class JobOffersAdapter(private val jobOffers : List<JobOffer>) : RecyclerView.Ad
     override fun onBindViewHolder(holder: JobOfferViewHolder, position: Int) {
 
         val jobOffer = jobOffers[position]
+        val picasso = Picasso.get()
 
         holder.view.textViewTitle.text = jobOffer.title  //Binds title data to the view (txtView having the id : textWiewTitle in layout_offer.xml)
-        holder.view.textViewLocation.text = HtmlCompat.fromHtml(jobOffer.description, 0)
+        holder.view.textViewDescription.text = HtmlCompat.fromHtml(jobOffer.description, 0)
+        holder.view.textViewLocation.text = jobOffer.location
+       // holder.view.imageLogoEnt.contentDescription = jobOffer.company_logo
+        val imageLogoEnt = holder.view.imageLogoEnt
+        picasso.load(jobOffer.company_logo).resize(150,80).into(imageLogoEnt)
+
         //We need to bind the data the same exact way for all of the JobOffer's class attributes, I'm just testing with this for now
 
         //Will show only if the offer is 'new', need to write a function that changes the new variable from true to false based on the 'created_at' date
