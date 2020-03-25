@@ -5,8 +5,10 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:paddingLeft="5dp"
+    android:paddingRight="5dp"
+    android:paddingTop="3dp">
 
-    >
     <!-- Toolbar declaration-->
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/activity_main_toolbar"
