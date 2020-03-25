@@ -8,7 +8,12 @@
     <string name="search_hint">Search</string>
     <string name="logo">logo</string>
     <string name="allMenu">Menu</string>
+<<<<<<< HEAD
     <string name="offer_location">location</string>
     <string name="type">Full Time</string>
     <string name="description">Job Offer Description</string>
+=======
+    <string name="description">Description</string>
+    <string name="notFound">No job found ...</string>
+>>>>>>> develop
 </resources>

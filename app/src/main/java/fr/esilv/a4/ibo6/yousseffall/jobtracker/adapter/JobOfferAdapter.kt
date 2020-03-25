@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.net.toUri
+import androidx.core.text.HtmlCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import fr.esilv.a4.ibo6.yousseffall.jobtracker.R
@@ -29,12 +30,13 @@ class JobOffersAdapter(private val jobOffers : List<JobOffer>) : RecyclerView.Ad
     override fun onBindViewHolder(holder: JobOfferViewHolder, position: Int) {
 
         val jobOffer = jobOffers[position]
+        val picasso = Picasso.get()
 
         holder.view.textViewTitle.text = jobOffer.title
-        holder.view.textViewCompany.text = jobOffer.company
+        //holder.view.textViewCompany.text = jobOffer.company
         holder.view.textViewLocation.text = jobOffer.location
 
-
+        //OnClick Display SeeOfferActivity
         holder.view.cardViewOffer.setOnClickListener(({
             val intent = Intent(holder.view.context, SeeOfferActivity::class.java)
             intent.putExtra("JOB_OFFER_TITLE", jobOffer.title)
@@ -47,11 +49,14 @@ class JobOffersAdapter(private val jobOffers : List<JobOffer>) : RecyclerView.Ad
             holder.view.context.startActivity(intent)
         }))
 
-        /*holder.view.buttonSeeOffer.setOnClickListener(({
-            val intent = Intent(Context context, SeeOfferActivity::class.java)
-            //intent.putExtra("jobOffer", jobOffer)
-            startActivity(intent)
-        }))*/
+        holder.view.textViewTitle.text = jobOffer.title  //Binds title data to the view (txtView having the id : textWiewTitle in layout_offer.xml)
+        holder.view.textViewDescription.text = HtmlCompat.fromHtml(jobOffer.description, 0)
+        holder.view.textViewLocation.text = jobOffer.location
+       // holder.view.imageLogoEnt.contentDescription = jobOffer.company_logo
+        val imageLogoEnt = holder.view.imageLogoEnt
+        picasso.load(jobOffer.company_logo).resize(150,80).into(imageLogoEnt)
+
+        //We need to bind the data the same exact way for all of the JobOffer's class attributes, I'm just testing with this for now
 
         //Will show only if the offer is 'new', need to write a function that changes the new variable from true to false based on the 'created_at' date
         //holder.view.textViewIsNew.visibility = if (jobOffer.isNew) View.VISIBLE else View.INVISIBLE

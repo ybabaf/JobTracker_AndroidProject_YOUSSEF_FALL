@@ -2,15 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/menu_activity_search"
-        android:icon="@drawable/ic_launcher_foreground"
-        app:showAsAction="ifRoom"
-        android:title="@string/search_hint">
-    </item>
-    <item
         android:id="@+id/menu_activity_options"
-        android:icon="@drawable/ic_launcher_foreground"
-        app:showAsAction="ifRoom"
-        android:title="@string/allMenu">
-    </item>
+        android:icon="@android:drawable/ic_menu_sort_by_size"
+        android:textColor="@color/white"
+        android:title="@string/allMenu"
+        app:showAsAction="ifRoom"></item>
+
+    <item
+        android:id="@+id/menu_activity_search"
+        android:icon="@android:drawable/ic_menu_search"
+        android:textColor="@color/white"
+        android:title="@string/search_hint"
+        app:actionViewClass="androidx.appcompat.widget.SearchView"
+        app:showAsAction="always|collapseActionView"></item>
+
 </menu>
