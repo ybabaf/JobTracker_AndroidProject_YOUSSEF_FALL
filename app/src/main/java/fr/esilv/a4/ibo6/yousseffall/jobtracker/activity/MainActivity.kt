@@ -1,7 +1,6 @@
 package fr.esilv.a4.ibo6.yousseffall.jobtracker.activity
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
@@ -47,8 +46,13 @@ class MainActivity : AppCompatActivity() {
         // - Inflate the menu and add it to the Toolbar
         val inflater: MenuInflater = menuInflater
         inflater.inflate(R.menu.activity_toolbar, menu)
-
         val searchItem = menu.findItem(R.id.menu_activity_search)
+        search(searchItem)
+        return true
+    }
+
+    private fun search(searchItem: MenuItem) {
+
         if(searchItem != null) {
             val searchView = searchItem.actionView as SearchView
             searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
@@ -74,13 +78,11 @@ class MainActivity : AppCompatActivity() {
 
             })
         }
-
-        return true
     }
 
     //Fetches all Offers (Positions) from the API
     private fun fetchJobOffers() {
-        refreshLayout.isRefreshing = true;
+        //refreshLayout.isRefreshing = true;
 
         JobOfferAPI().getPositions().enqueue(object: Callback<List<JobOffer>> {
 
@@ -94,14 +96,18 @@ class MainActivity : AppCompatActivity() {
 
             override fun onResponse(call: Call<List<JobOffer>>, response: Response<List<JobOffer>>) {
                 refreshLayout.isRefreshing = false;
+                if (response.body() == null) {
+                    Toast.makeText(applicationContext, R.string.notFound, Toast.LENGTH_LONG).show()
+                }
                 jobOffers = response.body() as ArrayList
-                println("\n\n $response")
+
+ /*               println("\n\n $response")
                 //println("message " + response.message())
                 // --- Debug --
                 println("$$$!$!$!$$!$!!$$!$!$$$!$!$!$$!$!!!$!$!$!!$$!$!!$!$$!$!$$!!")
                 println(":: Response Body ::")
                 println(jobOffers)
-
+*/
                 jobOffers.let{
                     showJobOffers(jobOffers)
                 }
