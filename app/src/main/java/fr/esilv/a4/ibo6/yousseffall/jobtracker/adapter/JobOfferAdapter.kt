@@ -32,7 +32,7 @@ class JobOffersAdapter(private val jobOffers : List<JobOffer>) : RecyclerView.Ad
 
         holder.view.textViewTitle.text = jobOffer.title
         holder.view.textViewCompany.text = jobOffer.company
-        holder.view.textViewLocation.text = jobOffer.location //HtmlCompat.fromHtml(jobOffer.description, 0)
+        holder.view.textViewLocation.text = jobOffer.location
 
 
         holder.view.cardViewOffer.setOnClickListener(({

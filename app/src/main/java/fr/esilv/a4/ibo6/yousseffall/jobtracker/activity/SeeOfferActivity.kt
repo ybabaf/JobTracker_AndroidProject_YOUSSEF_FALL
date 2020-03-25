@@ -1,13 +1,19 @@
 package fr.esilv.a4.ibo6.yousseffall.jobtracker.activity
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
+import android.webkit.WebResourceRequest
+import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import com.squareup.picasso.Picasso
 import fr.esilv.a4.ibo6.yousseffall.jobtracker.R
+import kotlinx.android.synthetic.main.activity_see_offer.*
 import org.nibor.autolink.LinkExtractor
 import org.nibor.autolink.LinkSpan
 import org.nibor.autolink.LinkType
@@ -29,9 +35,7 @@ class SeeOfferActivity : AppCompatActivity(){
         val location = intent.getStringExtra("JOB_OFFER_LOC")
         val type = intent.getStringExtra("JOB_OFFER_TYPE")
         val description = intent.getStringExtra("JOB_OFFER_DESC")
-        val howToApplyHtml = intent.getStringExtra("JOB_OFFER_URL")
 
-        val applyUrl = applyUrl(howToApplyHtml)
 
         val imageView = findViewById<ImageView>(R.id.imageLogoEnt)
         Picasso.get().load(image).into(imageView);
@@ -39,11 +43,21 @@ class SeeOfferActivity : AppCompatActivity(){
         findViewById<TextView>(R.id.textViewCompany).text = company
         findViewById<TextView>(R.id.textViewLocation).text = location
         findViewById<TextView>(R.id.textViewType).text = type
-        
+
         //TextView Description
         val txtViewDesc = findViewById<TextView>(R.id.textViewDescription)
         txtViewDesc.text = HtmlCompat.fromHtml(description, 0)
         txtViewDesc.movementMethod = ScrollingMovementMethod()
+
+        /*
+      When the "Apply" btn is clicked, we launch the webview
+       */
+        val howToApplyHtml = intent.getStringExtra("JOB_OFFER_URL")
+        val applyUrl = applyUrl(howToApplyHtml)
+        btnApply.setOnClickListener(({
+            val browserIntent = Intent(Intent.ACTION_VIEW, Uri.parse(applyUrl))
+            startActivity(browserIntent)
+        }))
     }
 
     private fun applyUrl(how_to_apply: String) : String {
