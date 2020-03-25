@@ -5,9 +5,7 @@
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:paddingLeft="5dp"
-    android:paddingRight="5dp"
-    android:paddingTop="3dp">
+>
 
     <!-- Toolbar declaration-->
     <androidx.appcompat.widget.Toolbar
@@ -28,7 +26,7 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textColor="#1A1A1A"
-        android:padding="10dp"
+        android:padding="15dp"
         />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewLanguages"
@@ -37,7 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:padding="10dp"/>
+        android:padding="15dp"/>
     <!-- End of Most pop languages-->
 
     <!-- Latest Positions -->
@@ -49,7 +47,7 @@
         android:layout_height="wrap_content"
         android:textStyle="bold"
         android:textColor="#1A1A1A"
-        android:padding="10dp"
+        android:padding="15dp"
         />
     <RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -57,7 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".activity.MainActivity"
-        android:padding="10dp">
+        android:padding="15dp">
 
 
         <!-- this layout allows to refresh the view when the user swipes down-->
