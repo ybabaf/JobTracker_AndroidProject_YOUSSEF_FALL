@@ -5,8 +5,11 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.core.content.ContextCompat.startActivity
+import androidx.core.net.toUri
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import fr.esilv.a4.ibo6.yousseffall.jobtracker.R
 import fr.esilv.a4.ibo6.yousseffall.jobtracker.activity.SeeOfferActivity
 import fr.esilv.a4.ibo6.yousseffall.jobtracker.model.JobOffer
@@ -21,7 +24,7 @@ class JobOffersAdapter(private val jobOffers : List<JobOffer>) : RecyclerView.Ad
         )
     }
 
-    override fun getItemCount() = jobOffers.size
+     override fun getItemCount() = jobOffers.size
 
     override fun onBindViewHolder(holder: JobOfferViewHolder, position: Int) {
 
@@ -31,6 +34,7 @@ class JobOffersAdapter(private val jobOffers : List<JobOffer>) : RecyclerView.Ad
         holder.view.textViewCompany.text = jobOffer.company
         holder.view.textViewLocation.text = jobOffer.location //HtmlCompat.fromHtml(jobOffer.description, 0)
 
+
         holder.view.cardViewOffer.setOnClickListener(({
             val intent = Intent(holder.view.context, SeeOfferActivity::class.java)
             intent.putExtra("JOB_OFFER_TITLE", jobOffer.title)
@@ -39,6 +43,7 @@ class JobOffersAdapter(private val jobOffers : List<JobOffer>) : RecyclerView.Ad
             intent.putExtra("JOB_OFFER_LOC", jobOffer.location)
             intent.putExtra("JOB_OFFER_TYPE", jobOffer.type)
             intent.putExtra("JOB_OFFER_DESC", jobOffer.description)
+            intent.putExtra("JOB_OFFER_URL", jobOffer.how_to_apply)
             holder.view.context.startActivity(intent)
         }))
 

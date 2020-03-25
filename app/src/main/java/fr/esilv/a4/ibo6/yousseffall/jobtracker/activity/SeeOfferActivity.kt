@@ -1,15 +1,18 @@
 package fr.esilv.a4.ibo6.yousseffall.jobtracker.activity
 
-import android.nfc.Tag
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
-import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.text.HtmlCompat
 import com.squareup.picasso.Picasso
 import fr.esilv.a4.ibo6.yousseffall.jobtracker.R
+import org.nibor.autolink.LinkExtractor
+import org.nibor.autolink.LinkSpan
+import org.nibor.autolink.LinkType
+import java.util.*
+
 
 class SeeOfferActivity : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,18 +29,31 @@ class SeeOfferActivity : AppCompatActivity(){
         val location = intent.getStringExtra("JOB_OFFER_LOC")
         val type = intent.getStringExtra("JOB_OFFER_TYPE")
         val description = intent.getStringExtra("JOB_OFFER_DESC")
+        val howToApplyHtml = intent.getStringExtra("JOB_OFFER_URL")
 
+        val applyUrl = applyUrl(howToApplyHtml)
+
+        val imageView = findViewById<ImageView>(R.id.imageLogoEnt)
+        Picasso.get().load(image).into(imageView);
         findViewById<TextView>(R.id.textViewTitle).text = title
         findViewById<TextView>(R.id.textViewCompany).text = company
         findViewById<TextView>(R.id.textViewLocation).text = location
         findViewById<TextView>(R.id.textViewType).text = type
+        
+        //TextView Description
         val txtViewDesc = findViewById<TextView>(R.id.textViewDescription)
         txtViewDesc.text = HtmlCompat.fromHtml(description, 0)
         txtViewDesc.movementMethod = ScrollingMovementMethod()
-        val imageView = findViewById<ImageView>(R.id.imageLogoEnt)
-        Picasso.get().load(image).into(imageView);
+    }
 
-
+    private fun applyUrl(how_to_apply: String) : String {
+        val whereToApplyString = HtmlCompat.fromHtml(how_to_apply, 0) //Get rid of the html tags
+        val linkExtractor: LinkExtractor = LinkExtractor.builder() //Extracting the url from the string with the autolink lib
+            .linkTypes(EnumSet.of(LinkType.URL, LinkType.WWW, LinkType.EMAIL))
+            .build()
+        val links: Iterable<LinkSpan> = linkExtractor.extractLinks(whereToApplyString)
+        val link = links.iterator().next()
+        return whereToApplyString.substring(link.getBeginIndex(), link.getEndIndex()); //Returns only the link from the string
     }
 
 }

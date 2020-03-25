@@ -80,7 +80,6 @@
         android:background="#444"
         android:layout_marginTop="8dp"/>
 
-
     <!-- Job Offer Description -->
     <TextView
         android:id="@+id/textViewTitleDesc"
@@ -93,6 +92,13 @@
         android:layout_marginTop="20dp"
         android:paddingBottom="10dp"
         />
+    <Button
+        android:id="@+id/btnApply"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:text="Apply"
+        />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -106,5 +112,10 @@
             android:textSize="16sp"
             />
     </ScrollView>
+
+    <WebView
+        android:id="@+id/webViewApply"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>
